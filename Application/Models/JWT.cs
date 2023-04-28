@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Identity;
+﻿namespace Application.Models;
 public class JWT
 {
     public string Secret { get; set; } = string.Empty;

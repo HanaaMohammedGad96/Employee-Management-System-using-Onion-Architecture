@@ -10,8 +10,11 @@ public static class PersistenceServiceRegistration
 {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+        services.AddDbContext<ApplicationDbContext>(options => {
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+               .EnableDetailedErrors()
+               .EnableSensitiveDataLogging().LogTo(Console.WriteLine);
+            });
 
       services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 

@@ -1,8 +1,7 @@
 ﻿using Application.Contracts.Infrastructure;
 using Application.Models;
 using Infrastructure.FileExport;
-using Infrastructure.Identity;
-using Infrastructure.Mail;
+using Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 namespace Infrastructure;

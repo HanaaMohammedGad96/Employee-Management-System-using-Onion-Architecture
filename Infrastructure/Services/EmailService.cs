@@ -1,7 +1,7 @@
 ﻿using Application.Contracts.Infrastructure;
 using Application.Models;
 
-namespace Infrastructure.Mail;
+namespace Infrastructure.Services;
 
 public class EmailService : IEmailService
 {

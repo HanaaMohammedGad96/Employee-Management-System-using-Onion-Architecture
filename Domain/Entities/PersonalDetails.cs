@@ -3,7 +3,7 @@ using Domain.Enums;
 
 namespace Domain.Entities;
 
-public class PersonalDetails : AuditableEntity
+public class PersonalDetail : AuditableEntity
 {
     public int Id { get; set; }
     public string FirstName { get; set; }

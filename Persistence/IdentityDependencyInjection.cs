@@ -11,7 +11,7 @@ namespace Persistence;
 
 public static class IdentityDependencyInjection
 {
-    public static IServiceCollection AddIdentity(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddIdentity<EmployeeAccount, IdentityRole>(options => options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier)
                 .AddEntityFrameworkStores<ApplicationDbContext>()

@@ -12,7 +12,7 @@ public class EmployeeAccount :  IdentityUser, IActive , IDelete
     public virtual Department Department { get; set; }  
 
     public int PersonalDetailsId { get; set; }
-    public virtual PersonalDetails PersonalDetails { get; set; }
+    public virtual PersonalDetail PersonalDetails { get; set; }
 
     public int AddressId { get; set; }
     public virtual Address Address { get; set; } 
