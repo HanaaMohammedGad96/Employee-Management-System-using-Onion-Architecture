@@ -1,11 +1,12 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Persistence;
 
-public class ApplicationDbContext  : IdentityDbContext<EmployeeAccount>// IApplicationDbContext 
+public class ApplicationDbContext  : IdentityDbContext<EmployeeAccount>
 {
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 		: base(options)
@@ -28,6 +29,15 @@ public class ApplicationDbContext  : IdentityDbContext<EmployeeAccount>// IAppli
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        modelBuilder.Entity<IdentityUserLogin<string>>()
+            .HasKey(login => login.UserId); 
+
+        modelBuilder.Entity<IdentityUserRole<string>>()
+            .HasKey(login => login.UserId); 
+        
+        modelBuilder.Entity<IdentityUserToken<string>>()
+            .HasKey(login => login.UserId);
 
         //TODO: Seed Data and create the first admin
     }

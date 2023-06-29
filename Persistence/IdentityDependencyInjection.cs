@@ -13,7 +13,7 @@ public static class IdentityDependencyInjection
 {
     public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddIdentity<EmployeeAccount, IdentityRole>(options => options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier)
+        services.AddIdentity<IdentityUser, IdentityRole>(options => options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
         services.Configure<DataProtectionTokenProviderOptions>(o =>
