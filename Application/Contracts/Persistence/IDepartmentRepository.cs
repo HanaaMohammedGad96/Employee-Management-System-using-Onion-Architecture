@@ -4,5 +4,5 @@ namespace Application.Contracts.Persistence;
 
 public interface IDepartmentRepository : IAsyncRepository<Department>
 {
-    Task<List<Department>> GetDepartmentsWithManagers(bool includePassedManagers);
+    Task<List<Department>> GetDepartmentsWithManager(bool includePassedManagers);
 }

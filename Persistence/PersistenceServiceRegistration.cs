@@ -16,7 +16,8 @@ public static class PersistenceServiceRegistration
                .EnableSensitiveDataLogging().LogTo(Console.WriteLine);
             });
 
-      services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
+        services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
+        services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
         return services;
     }

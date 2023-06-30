@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Features.Departments.Commands;
+using Application.Features.Departments.Models;
+using AutoMapper;
+using Domain.Entities;
 
-namespace Application.Profiles
+namespace Application.Profiles;
+
+public class DepartmentProfile   : Profile
 {
-    internal class DepartmentProfile
-    {
-    }
+	public DepartmentProfile()
+	{
+		CreateMap<Department, DepartmentVm>().ReverseMap();
+		CreateMap<Department, CreateDepartmentCommand>().ReverseMap();
+	}
 }

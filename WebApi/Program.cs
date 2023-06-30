@@ -1,9 +1,10 @@
 using Serilog.Events;
 using Serilog;
-using WebApi.Middlewares;
 using Application;
 using Infrastructure;
 using Persistence;
+using WebApi.Middleware;
+using WebApi.Config;
 
 Log.Logger = (Serilog.ILogger)new LoggerConfiguration()
     .Enrich.FromLogContext()
@@ -18,8 +19,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwagger();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -29,12 +30,12 @@ builder.Services.AddIdentityServices(builder.Configuration);
 // Add services to the container.
 builder.Services.AddControllers();
 
-builder.Services.AddApiVersioning(setupAction =>
-{
-    setupAction.AssumeDefaultVersionWhenUnspecified = true;
-    setupAction.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
-    setupAction.ReportApiVersions = true;
-});
+//builder.Services.AddApiVersioning(setupAction =>
+//{
+//    setupAction.AssumeDefaultVersionWhenUnspecified = true;
+//    setupAction.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+//    setupAction.ReportApiVersions = true;
+//});
 
 builder.Services.AddCors(options =>
 {
@@ -49,7 +50,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Employee Management API"));
 }
 
 app.UseHttpsRedirection();
@@ -58,11 +59,13 @@ app.UseRouting();
 
 app.UseAuthentication();
 
+
+app.UseCustomExceptionHandler();
+
 app.UseCors("MyAllowedOrigins");
 
 app.UseAuthorization();
 
-app.UseMiddleware(typeof(ErrorHandlingMiddleWare));
 
 app.MapControllers();
 

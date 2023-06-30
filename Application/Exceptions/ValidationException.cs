@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 
-namespace Domain.Exceptions;
+using FluentValidation.Results;
+
+namespace Application.Exceptions;
 
 public class ValidationException : ApplicationException
 {
@@ -10,9 +12,9 @@ public class ValidationException : ApplicationException
     {
         ValdationErrors = new List<string>();
 
-        //foreach (var validationError in validationResult.Errors)
-        //{
-        //    ValdationErrors.Add(validationError.ErrorMessage);
-        //}
+        foreach (var validationError in validationResult.Errors)
+        {
+            ValdationErrors.Add(validationError.ErrorMessage);
+        }
     }
 }

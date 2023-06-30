@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Persistence;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Repositories;
 
@@ -9,9 +10,13 @@ public class DepartmentRepository : BaseRepository<Department>, IDepartmentRepos
     {
     }
 
-    public Task<List<Department>> GetDepartmentsWithManagers(bool includePassedManagers)
+    public async Task<List<Department>> GetDepartmentsWithManager(bool includePassedManagers)
     {
-        //TODO: set your code
-        throw new NotImplementedException();
+        var query = _context.Departments.AsNoTracking();
+
+        if (includePassedManagers)
+            query = query.Include(e => e.Manager);
+
+        return await query.ToListAsync();
     }
 }
